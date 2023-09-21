@@ -25,6 +25,21 @@ body {
 .menu button {
     margin: 5px 0;
 }
+
 .game {
     flex: 0 1 70%;
+}
+
+.size p {
+    margin: 10px 0 1px 0;
+}
+
+
+.size__input {
+    display: flex;
+}
+
+.size__input input {
+    width: 50%;
+    margin: 10px 1px;
 }

@@ -5,8 +5,26 @@ let mas = []
 let count = 0
 let timer = 0
 
+let cellHoriz = 60 
+let cellVert = 40 
+
 const startBtn = document.getElementById('start')
 const clearBtn = document.getElementById('clear')
+const randomBtn = document.getElementById('random')
+
+const cellHorizInput = document.getElementById('cellHoriz')
+const cellVertInput = document.getElementById('cellVert')
+
+
+
+cellHorizInput.addEventListener('change', (e) => {
+    cellHoriz = Number(e.target.value)
+})
+cellVertInput.addEventListener('change', (e) => {
+    cellVert = Number(e.target.value)
+})
+
+console.log(cellHoriz, cellVert);
 
 canvas.addEventListener('click', function (e) {
     let x = e.offsetX
@@ -18,11 +36,11 @@ canvas.addEventListener('click', function (e) {
 })
 
 function goLife() {
-    let n = 60
-    let m = 40
-    for (let i = 0; i < m; i++) {
+    // let n = 60
+    // let m = 40
+    for (let i = 0; i < cellVert; i++) {
         mas[i] = []
-        for (let j = 0; j < n; j++) {
+        for (let j = 0; j < cellHoriz; j++) {
             mas[i][j] = 0
         }
     }
@@ -32,9 +50,9 @@ goLife()
 
 function drawField() {
     ctx.clearRect(0, 0, 600, 400)
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < cellVert; i++) {
 
-        for (let j = 0; j < 60; j++) {
+        for (let j = 0; j < cellHoriz; j++) {
             if (mas[i][j] == 1) {
                 ctx.fillRect(j * 10, i * 10, 10, 10)
             }
@@ -44,9 +62,9 @@ function drawField() {
 
 function startLife() {
     const mas2 = []
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < cellVert; i++) {
         mas2[i] = []
-        for (let j = 0; j < 60; j++) {
+        for (let j = 0; j < cellHoriz; j++) {
             let neighbors = 0
             if (mas[fpm(i) - 1][j] == 1) neighbors++ //top                
             if (mas[i][fpp(j) + 1] == 1) neighbors++ //right
@@ -69,7 +87,7 @@ function startLife() {
                 mas2[i][j] = 1
             } else if (mas[i][j] == 0 && neighbors == 2) {
                 mas2[i][j] = 0
-            }
+            }            
         }
     }
 
@@ -83,12 +101,12 @@ function startLife() {
 
 function fpm(i) {
     if (i == 0) {
-        return 40
+        return cellVert
     } else return i
 }
 
 function fpp(i) {
-    if (i == 39) {
+    if (i == cellVert - 1) {
         return -1
     } else return i
 }
@@ -100,6 +118,12 @@ function pouseLife() {
 function clearLife() {
     location.reload()
 }
+
+function randomLife() {
+    
+}
+
+
 
 startBtn.addEventListener('click', () => {
     if (startBtn.textContent === 'Start') {

@@ -1,8 +1,12 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
+
 let mas = []
 let count = 0
 let timer = 0
+
+const startBtn = document.getElementById('start')
+const clearBtn = document.getElementById('clear')
 
 canvas.addEventListener('click', function (e) {
     let x = e.offsetX
@@ -14,8 +18,8 @@ canvas.addEventListener('click', function (e) {
 })
 
 function goLife() {
-    let n = 30
-    let m = 30
+    let n = 60
+    let m = 40
     for (let i = 0; i < m; i++) {
         mas[i] = []
         for (let j = 0; j < n; j++) {
@@ -27,10 +31,10 @@ function goLife() {
 goLife()
 
 function drawField() {
-    ctx.clearRect(0, 0, 300, 300)
-    for (let i = 0; i < 30; i++) {
+    ctx.clearRect(0, 0, 600, 400)
+    for (let i = 0; i < 40; i++) {
 
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 60; j++) {
             if (mas[i][j] == 1) {
                 ctx.fillRect(j * 10, i * 10, 10, 10)
             }
@@ -40,11 +44,11 @@ function drawField() {
 
 function startLife() {
     const mas2 = []
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
         mas2[i] = []
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 60; j++) {
             let neighbors = 0
-            if (mas[fpm(i) - 1][j] == 1) neighbors++ //up                
+            if (mas[fpm(i) - 1][j] == 1) neighbors++ //top                
             if (mas[i][fpp(j) + 1] == 1) neighbors++ //right
             if (mas[fpp(i) + 1][j] == 1) neighbors++ //bottom            
             if (mas[i][fpm(j) - 1] == 1) neighbors++ //left
@@ -69,24 +73,42 @@ function startLife() {
         }
     }
 
-
     mas = mas2
     drawField()
     count++
     document.getElementById('count').innerHTML = count
     timer = setTimeout(startLife, 500)
+    startBtn.innerText = 'Pause'
 }
 
 function fpm(i) {
     if (i == 0) {
-        return 30
+        return 40
     } else return i
 }
 
 function fpp(i) {
-    if (i == 29) {
+    if (i == 39) {
         return -1
     } else return i
 }
 
-document.getElementById('start').onclick = startLife
+function pouseLife() {
+    clearTimeout(timer)
+}
+
+function clearLife() {
+    location.reload()
+}
+
+startBtn.addEventListener('click', () => {
+    if (startBtn.textContent === 'Start') {
+        startLife()
+    } else {
+        pouseLife()
+        startBtn.innerText = 'Start'
+    }
+})
+
+
+clearBtn.addEventListener('click', clearLife)

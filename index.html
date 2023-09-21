@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,21 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
 </head>
+
 <body>
-    <canvas id="canvas" width="300" height="300"></canvas>
-    <p>Колличество циклов <span id="count">0</span></p>
-    <button id="start">Start</button>
+    <main class="main">
+        <section class="menu">
+            <button id="start">Start</button>
+            <button id="clear">Clear</button>
+            <p>Колличество циклов <span id="count">0</span></p>
+            
+        </section>
+        <section class="game">
+            <canvas id="canvas" width="600" height="400"></canvas>
+        </section>
+    </main>
+
+    
 </body>
+
 </html>

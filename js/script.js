@@ -5,6 +5,8 @@ let mas = []
 let count = 0
 let timer = 0
 
+let randArr = []
+
 let cellHoriz = 60 
 let cellVert = 40 
 
@@ -16,6 +18,17 @@ const cellHorizInput = document.getElementById('cellHoriz')
 const cellVertInput = document.getElementById('cellVert')
 
 
+randomBtn.addEventListener('click', () => { 
+    for (let i = 0; i < cellVert; i++) {        
+        randArr[i] = [];        
+        for (let j = 0; j < cellHoriz; j++) {            
+            randArr[i][j] = Math.floor(Math.random() * 2)             
+        }
+    } 
+    mas = randArr
+    clearTimeout(timer)
+    startLife()
+})
 
 cellHorizInput.addEventListener('change', (e) => {
     cellHoriz = Number(e.target.value)
@@ -23,8 +36,6 @@ cellHorizInput.addEventListener('change', (e) => {
 cellVertInput.addEventListener('change', (e) => {
     cellVert = Number(e.target.value)
 })
-
-console.log(cellHoriz, cellVert);
 
 canvas.addEventListener('click', function (e) {
     let x = e.offsetX
@@ -36,8 +47,6 @@ canvas.addEventListener('click', function (e) {
 })
 
 function goLife() {
-    // let n = 60
-    // let m = 40
     for (let i = 0; i < cellVert; i++) {
         mas[i] = []
         for (let j = 0; j < cellHoriz; j++) {
@@ -49,7 +58,7 @@ function goLife() {
 goLife()
 
 function drawField() {
-    ctx.clearRect(0, 0, 600, 400)
+    ctx.clearRect(0, 0, cellHoriz * 10, cellVert * 10)
     for (let i = 0; i < cellVert; i++) {
 
         for (let j = 0; j < cellHoriz; j++) {

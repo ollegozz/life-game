@@ -17,7 +17,6 @@ const randomBtn = document.getElementById('random')
 const cellHorizInput = document.getElementById('cellHoriz')
 const cellVertInput = document.getElementById('cellVert')
 
-
 randomBtn.addEventListener('click', () => { 
     for (let i = 0; i < cellVert; i++) {        
         randArr[i] = [];        
@@ -120,7 +119,7 @@ function fpp(i) {
     } else return i
 }
 
-function pouseLife() {
+function pauseLife() {
     clearTimeout(timer)
 }
 
@@ -128,20 +127,13 @@ function clearLife() {
     location.reload()
 }
 
-function randomLife() {
-    
-}
-
-
-
 startBtn.addEventListener('click', () => {
     if (startBtn.textContent === 'Start') {
         startLife()
     } else {
-        pouseLife()
+        pauseLife()
         startBtn.innerText = 'Start'
     }
 })
-
 
 clearBtn.addEventListener('click', clearLife)
